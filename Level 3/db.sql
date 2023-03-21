@@ -1,80 +1,82 @@
-create table jeux{
+create table jeux(
     "id" int,
     "joueur1" varchar(255),
     "joueur2" varchar(255),
-    "resultat" varchar(255),
-}
-
-create function jeux(joueur1 varchar(255), joueur2 varchar(255)){
-    returns int as
+    "resultat" varchar(255)
+)
+-- laguage postgresql
+DROP FUNCTION IF EXISTS verif(varchar(255), varchar(255));
+create function verif(joueur1 varchar(255), joueur2 varchar(255))
+    returns int as $$
     begin
-        call verif(joueur1, joueur2);
-        if joueur1 = joueur2 then
-            update jeux set resultat = "egalite" where joueur1 = joueur1 and joueur2 = joueur2;
+        if joueur1 not in ('Pierre', 'Feuille', 'Ciseaux', 'Lezard', 'Spock') then
+            return 1;
+        end if;
+        if joueur2 not in ('Pierre', 'Feuille', 'Ciseaux', 'Lezard', 'Spock') then
+            return 1;
+        end if;
+    end;
+    $$ LANGUAGE plpgsql;
+SELECT verif(joueur1, joueur2) AS result FROM jeux;
+
+DROP FUNCTION IF EXISTS gagnant(varchar(255), varchar(255));
+create function gagnant(j1 varchar(255), j2 varchar(255))
+    returns int as $$
+    begin
+        if j1 = j2 then
+            update jeux set resultat = 'egalite' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
             return 0;
         else
-            if joueur1 == "Pierre" then
-                if joueur2 == "Ciseaux" or joueur2 == "Lezard" then
-                    update jeux set resultat = "joueur1" where joueur1 = joueur1 and joueur2 = joueur2;
+            if j1 = 'Pierre' then
+                if j2 = 'Ciseaux' or j2 = 'Lezard' then
+                    update jeux set resultat = 'joueur1' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
-                if joueur2 == "Feuille" or joueur2 == "Spock" then
-                    update jeux set resultat = "joueur2" where joueur1 = joueur1 and joueur2 = joueur2;
-                    return 0;
-                end if;
-            end if;
-            if joueur1 == "Feuille" then
-                if joueur2 == "Pierre" or joueur2 == "Spock" then
-                    update jeux set resultat = "joueur1" where joueur1 = joueur1 and joueur2 = joueur2;
-                    return 0;
-                end if;
-                if joueur2 == "Ciseaux" or joueur2 == "Lezard" then
-                    update jeux set resultat = "joueur2" where joueur1 = joueur1 and joueur2 = joueur2;
+                if j2 = 'Feuille' or j2 = 'Spock' then
+                    update jeux set resultat = 'joueur2' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
             end if;
-            if joueur1 == "Ciseaux" then
-                if joueur2 == "Feuille" or joueur2 == "Lezard" then
-                    update jeux set resultat = "joueur1" where joueur1 = joueur1 and joueur2 = joueur2;
+            if j1 = 'Feuille' then
+                if j2 = 'Pierre' or j2 = 'Spock' then
+                    update jeux set resultat = 'joueur1' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
-                if joueur2 == "Pierre" or joueur2 == "Spock" then
-                    update jeux set resultat = "joueur2" where joueur1 = joueur1 and joueur2 = joueur2;
-                    return 0;
-                end if;
-            end if;
-            if joueur1 == "Lezard" then
-                if joueur2 == "Feuille" or joueur2 == "Spock" then
-                    update jeux set resultat = "joueur1" where joueur1 = joueur1 and joueur2 = joueur2;
-                    return 0;
-                end if;
-                if joueur2 == "Pierre" or joueur2 == "Ciseaux" then
-                    update jeux set resultat = "joueur2" where joueur1 = joueur1 and joueur2 = joueur2;
+                if j2 = 'Ciseaux' or j2 = 'Lezard' then
+                    update jeux set resultat = 'joueur2' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
             end if;
-            if joueur1 == "spock" then
-                if joueur2 == "Pierre" or joueur2 == "Ciseaux" then
-                    update jeux set resultat = "joueur1" where joueur1 = joueur1 and joueur2 = joueur2;
+            if j1 = 'Ciseaux' then
+                if j2 = 'Feuille' or j2 = 'Lezard' then
+                    update jeux set resultat = 'joueur1' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
-                if joueur2 == "Feuille" or joueur2 == "Lezard" then
-                    update jeux set resultat = "joueur2" where joueur1 = joueur1 and joueur2 = joueur2;
+                if j2 = 'Pierre' or j2 = 'Spock' then
+                    update jeux set resultat = 'joueur2' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
+                    return 0;
+                end if;
+            end if;
+            if j1 = 'Lezard' then
+                if j2 = 'Feuille' or j2 = 'Spock' then
+                    update jeux set resultat = 'joueur1' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
+                    return 0;
+                end if;
+                if j2 = 'Pierre' or j2 = 'Ciseaux' then
+                    update jeux set resultat = 'joueur2' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
+                    return 0;
+                end if;
+            end if;
+            if j1 = 'Spock' then
+                if j2 = 'Pierre' or j2 = 'Ciseaux' then
+                    update jeux set resultat = 'joueur1' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
+                    return 0;
+                end if;
+                if j2 = 'Feuille' or j2 = 'Lezard' then
+                    update jeux set resultat = 'joueur2' where jeux.joueur1 = j1 and jeux.joueur2 = j2;
                     return 0;
                 end if;
             end if;
         end if;
     end;
-}
-
-create function verif(joueur1 varchar(255), joueur2 varchar(255)){
-    returns int as
-    begin
-        if joueur1 != "Pierre" and joueur1 != "Feuille" and joueur1 != "Ciseaux" and joueur1 != "Lezard" and joueur1 != "Spock" then
-            raise exception 'Joueur 1 doit choisir entre Pierre, Feuille, Ciseaux, Lezard ou Spock';
-        end if;
-        if joueur2 != "Pierre" and joueur2 != "Feuille" and joueur2 != "Ciseaux" and joueur2 != "Lezard" and joueur2 != "Spock" then
-            raise exception 'Joueur 2 doit choisir entre Pierre, Feuille, Ciseaux, Lezard ou Spock';
-        end if;
-    end;
-}
+    $$ LANGUAGE plpgsql;

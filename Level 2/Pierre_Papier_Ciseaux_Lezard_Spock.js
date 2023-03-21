@@ -48,7 +48,7 @@ function playGame(userChoice) {
   if (userChoice === computerChoice) {
     console.log("It's a tie!");
   } else {
-	console.log(resultats[userChoice][computerChoice]);
+	  console.log(resultats[userChoice][computerChoice]);
   }
 
   rl.close();
@@ -56,13 +56,13 @@ function playGame(userChoice) {
 
 function askUser() {
 	rl.question("Choose rock, paper or scissors: ", (userChoice) => {
-	if (options.includes(userChoice)) {
-		playGame(userChoice);
-	} else {
-		console.log("Invalid choice");
-		askUser();
-	}
-});
+    if (options.includes(userChoice)) {
+      playGame(userChoice);
+    } else {
+		  console.log("Invalid choice");
+		  askUser();
+	  }
+  });
 }
   
 askUser();

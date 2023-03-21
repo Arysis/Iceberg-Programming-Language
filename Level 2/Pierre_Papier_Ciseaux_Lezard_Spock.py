@@ -66,7 +66,7 @@ def combat(joueur1):
 
 # Créer une fenêtre principale
 root = tk.Tk()
-root.title("Choix du nombre de joueurs")
+root.title("jeux big bang theory")
 
 game()
 # Démarrer la boucle principale de la fenêtre

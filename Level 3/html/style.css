@@ -1,0 +1,76 @@
+/* Centrer tous les éléments de la page */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style de la page */
+body {
+  background-color: #F0F0F0;
+  font-family: sans-serif;
+}
+
+/* Style du conteneur principal */
+#container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Style du contenu principal */
+#content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style du formulaire */
+.joueur {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style des étiquettes */
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Style de la sélection */
+select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+/* Style du bouton de soumission */
+input[type="submit"] {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #337ab7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style du pied de page */
+#footer {
+  background-color: #F0F0F0;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #CCCCCC;
+  margin-top: auto;
+}

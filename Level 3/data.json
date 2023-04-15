@@ -1,0 +1,32 @@
+{
+    "Pierre": {
+        "Ciseaux": "Joueur 1 gagne",
+        "Lézard": "Joueur 1 gagne",
+        "Papier": "Joueur 2 gagne",
+        "Spock": "Joueur 2 gagne"
+    },
+    "Papier": {
+        "Pierre": "Joueur 1 gagne",
+        "Spock": "Joueur 1 gagne",
+        "Ciseaux": "Joueur 2 gagne",
+        "Lézard": "Joueur 2 gagne"
+    },
+    "Ciseaux": {
+        "Papier": "Joueur 1 gagne",
+        "Lézard": "Joueur 1 gagne",
+        "Pierre": "Joueur 2 gagne",
+        "Spock": "Joueur 2 gagne"
+    },
+    "Lézard": {
+        "Papier": "Joueur 1 gagne",
+        "Spock": "Joueur 1 gagne",
+        "Pierre": "Joueur 2 gagne",
+        "Ciseaux": "Joueur 2 gagne"
+    },
+    "Spock": {
+        "Pierre": "Joueur 1 gagne",
+        "Ciseaux": "Joueur 1 gagne",
+        "Papier": "Joueur 2 gagne",
+        "Lézard": "Joueur 2 gagne"
+    }
+}
